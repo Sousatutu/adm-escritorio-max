@@ -1,0 +1,16 @@
+.git/
+.github/
+.tmp/
+.agents/
+.codex/
+node_modules/
+docs/
+tests/
+tools/
+ADM-NETFELIZ.docx
+README.md
+package.json
+docker-compose.yml
+*.log
+.env
+.env.*

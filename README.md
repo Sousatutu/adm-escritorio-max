@@ -14,6 +14,20 @@ npm start
 
 Abra **http://localhost:8080**. Não é necessário executar `npm install`: não há dependências de execução. `Ctrl+C` encerra o servidor. Para publicar em uma hospedagem estática, mantenha a estrutura de pastas e use `index.html` como entrada.
 
+## Docker e Easypanel
+
+O projeto já inclui um `Dockerfile` pronto para a Easypanel. A imagem usa Nginx, expõe a porta **80** e possui verificação de saúde em `/`. Não há banco de dados, volume ou variável de ambiente obrigatória: o progresso do jogador é salvo no navegador.
+
+Na Easypanel, crie um serviço **App**, conecte este repositório e selecione **Dockerfile** como método de build. Use a porta interna `80`, vincule seu domínio e faça o deploy. A plataforma deve apontar o health check para `/`.
+
+Para validar localmente em uma máquina com Docker:
+
+```sh
+docker compose up --build
+```
+
+Abra `http://localhost:8080`. Para encerrar, execute `docker compose down`.
+
 ## Como jogar
 
 - Clique no mapa e use **WASD/setas** para andar, **E/Enter** para conversar ou clique no chão para caminhar. Há controles de toque no celular.

@@ -1,0 +1,14 @@
+{
+  "name": "labirinto-burocratico",
+  "version": "3.0.0",
+  "private": true,
+  "description": "RPG educativo 2D sobre burocracia, documentos e decisões institucionais.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node tools/serve.cjs",
+    "test": "node --test tests/engine.test.cjs tests/interface.test.cjs tests/legacy.test.cjs",
+    "test:browser": "node tools/browser-qa.cjs"
+  }
+}

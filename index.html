@@ -1,0 +1,247 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#142536" />
+    <title>O Labirinto Burocrático · NetFeliz</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="content/catalog.js"></script>
+    <script defer src="content/dialogues.js"></script>
+    <script defer src="domain/documents.js"></script>
+    <script defer src="domain/game.js"></script>
+    <script defer src="engine.js"></script>
+    <script defer src="infrastructure/legacy-engine.js"></script>
+    <script defer src="infrastructure/migration.js"></script>
+    <script defer src="infrastructure/storage.js"></script>
+    <script defer src="infrastructure/audio.js"></script>
+    <script defer src="application/session.js"></script>
+    <script defer src="assets/atlas.js"></script>
+    <script defer src="rendering/world.js"></script>
+    <script defer src="application/navigation.js"></script>
+    <script defer src="rendering/lighting.js"></script>
+    <script defer src="rendering/scene.js"></script>
+    <script defer src="ui/dialog.js"></script>
+    <script defer src="ui/inventory.js"></script>
+    <script defer src="ui/app.js"></script>
+    <script defer src="game.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./index.html"
+        ><span class="brand-mark">LB<span>01</span></span
+        ><span>LABIRINTO<small>BUROCRÁTICO</small></span></a
+      ><span class="top-context"
+        ><i></i> NETFELIZ · DEPARTAMENTO ADMINISTRATIVO</span
+      >
+      <nav class="top-actions" aria-label="Preferências">
+        <button id="sound" class="quiet" aria-pressed="false">
+          Som desligado</button
+        ><button id="settings" class="quiet">Visual</button
+        ><button id="help" class="quiet">Como jogar</button>
+      </nav>
+    </header>
+    <main>
+      <section id="welcome" class="welcome">
+        <div class="intro-copy">
+          <p class="eyebrow">SEU PRIMEIRO DIA. UM EXPEDIENTE IMPREVISÍVEL.</p>
+          <h1>
+            O caminho parece<br />simples.<br /><em>Até o plano mudar.</em>
+          </h1>
+          <p class="intro-description">
+            Uma compra para aprovar. Seis setores para conhecer. Entre
+            formulários, assinaturas e imprevistos, descubra como uma
+            organização funciona de verdade.
+          </p>
+          <label class="eyebrow difficulty-label" for="difficulty"
+            >QUAL SERÁ O SEU DESAFIO?</label
+          ><select id="difficulty">
+            <option value="normal">
+              Desafiador · 18 ações · 3 imprevistos
+            </option>
+            <option value="intense">
+              Sob pressão · 13 ações · 3 imprevistos
+            </option>
+            <option value="classic">Tranquilo · explore no seu ritmo</option>
+          </select>
+          <div class="intro-actions">
+            <button id="start" class="primary">
+              Começar expediente <span>→</span></button
+            ><button id="resume" class="secondary" hidden>
+              Continuar partida
+            </button>
+          </div>
+          <p id="load-status" class="muted small" role="status">
+            Conferindo sua pasta…
+          </p>
+          <div class="intro-meta">
+            <span>RPG 2D</span><span>Max Weber na prática</span
+            ><span>Funciona offline</span>
+          </div>
+        </div>
+        <div class="intro-art" aria-hidden="true">
+          <div class="art-top">NETFELIZ <span>EXPEDIENTE / 001</span></div>
+          <div class="paper-back"></div>
+          <div class="hero-paper">
+            <div class="paper-tab">PROCESSO INTERNO</div>
+            <small>REQ-001 · REVISÃO 02</small>
+            <h2>Compra de<br />equipamentos</h2>
+            <div class="paper-rule"></div>
+            <p>FINALIDADE</p>
+            <div class="paper-line"></div>
+            <div class="paper-line short"></div>
+            <div class="paper-count">
+              <b>07</b><span>computadores<br />solicitados</span>
+            </div>
+            <div class="hero-stamp">EM REVISÃO</div>
+            <div class="paper-signatures">
+              <span>✓ PROTOCOLO</span><span>↻ FINANCEIRO</span>
+            </div>
+          </div>
+          <div class="art-alert">
+            <span>!</span>
+            <div>
+              <b>A equipe cresceu.</b
+              ><small>Seu requerimento precisa acompanhar.</small>
+            </div>
+          </div>
+          <p class="art-bottom">
+            AS REGRAS ORGANIZAM. SUAS DECISÕES FAZEM A DIFERENÇA.
+          </p>
+        </div>
+        <div class="intro-footer">
+          <span>APRENDER FAZENDO</span>
+          <p>Competência, hierarquia e impessoalidade em cada decisão.</p>
+          <button id="about" class="text-btn">Sobre o projeto ↗</button>
+        </div>
+      </section>
+      <section id="play" class="play" hidden aria-label="Área do jogo">
+        <div class="mission-header">
+          <div>
+            <p class="eyebrow">NETFELIZ / PROCESSO REQ-001</p>
+            <h1>Um dia no escritório<span id="mode-label">Desafiador</span></h1>
+          </div>
+          <div class="stats">
+            <div><span>AÇÕES RESTANTES</span><b id="turns">18</b></div>
+            <div><span>VIDAS</span><b id="lives">● ● ●</b></div>
+            <div><span>PONTOS</span><b id="score">0</b></div>
+            <div><span>TEMPO ATIVO</span><b id="timer">00:00</b></div>
+          </div>
+        </div>
+        <div id="event-banner" class="event-banner" role="status" hidden>
+          <span class="incident-symbol">!</span>
+          <div>
+            <span class="eyebrow">MUDANÇA DE PLANOS</span
+            ><b id="event-title"></b>
+            <p id="event-text"></p>
+          </div>
+          <button id="event-open" class="secondary">Ver ocorrência →</button>
+        </div>
+        <div class="game-layout">
+          <div class="map-column">
+            <div class="map-top">
+              <span
+                ><i></i> NETFELIZ HQ
+                <span id="room-label">/ CORREDOR CENTRAL</span></span
+              ><button id="overview" class="map-button">
+                Mapa dos setores ↗
+              </button>
+            </div>
+            <div class="canvas-wrap">
+              <canvas
+                id="office"
+                width="480"
+                height="320"
+                tabindex="0"
+                aria-label="Escritório. Use WASD ou setas para andar, E ou Enter para conversar. Visitar setor permite navegar também por teclado."
+              ></canvas
+              ><span id="nearby" class="nearby" hidden></span>
+              <div class="map-legend">01 / ANDAR TÉRREO</div>
+            </div>
+            <div class="map-bottom">
+              <span><kbd>W A S D</kbd> / <kbd>↑ ← ↓ →</kbd> mover</span
+              ><span><kbd>E</kbd> conversar</span
+              ><span>Clique no chão para caminhar</span>
+            </div>
+            <div class="mobile-controls" aria-label="Controles de movimento">
+              <button data-dir="up" aria-label="Andar para cima">↑</button
+              ><button data-dir="left" aria-label="Andar para a esquerda">
+                ←</button
+              ><button data-dir="down" aria-label="Andar para baixo">↓</button
+              ><button data-dir="right" aria-label="Andar para a direita">
+                →</button
+              ><button id="interact">Conversar</button>
+            </div>
+            <div class="below-map">
+              <p id="toast" class="toast" role="status" aria-live="polite">
+                Procure Ana no Protocolo.
+              </p>
+              <p id="save-status" class="save-status" role="status">
+                Partida local
+              </p>
+            </div>
+            <section class="journal-card">
+              <div class="section-heading">
+                <h2>Diário do expediente</h2>
+                <span id="event-count">0/3 imprevistos</span>
+              </div>
+              <ol id="event-log"></ol>
+            </section>
+          </div>
+          <aside class="sidebar">
+            <section class="task-card">
+              <p class="eyebrow">SEU PRÓXIMO PASSO</p>
+              <h2 id="objective-title">Registre o requerimento</h2>
+              <p id="objective-text"></p>
+              <div id="missing-list"></div>
+              <button id="go-next" class="primary full">
+                Visitar setor <span>→</span>
+              </button>
+            </section>
+            <section class="route-card">
+              <div class="section-heading">
+                <h2>Aprovações</h2>
+                <span id="progress-count">0/6</span>
+              </div>
+              <div class="progress-track"><div id="progress-fill"></div></div>
+              <ol id="route"></ol>
+              <p class="route-note">
+                Setores especializados analisam o pedido dentro de suas
+                competências.
+              </p>
+            </section>
+            <button id="document" class="folder-button">
+              <span class="folder-icon">▤</span
+              ><span
+                ><b>Minha pasta</b
+                ><small id="folder-count">2 documentos · REQ-001</small></span
+              ><span>↗</span>
+            </button>
+            <div id="pinned-document" class="pinned-document" hidden></div>
+            <button id="glossary" class="theory-button">
+              <span>?</span
+              ><span
+                ><b>Guia de bolso</b
+                ><small>Os seis conceitos de Weber</small></span
+              ><span>↗</span></button
+            ><button id="restart" class="text-btn">Recomeçar expediente</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span>O LABIRINTO BUROCRÁTICO</span
+      ><span>Projeto acadêmico · Introdução à Administração · IFTO</span>
+    </footer>
+    <dialog id="modal" aria-labelledby="modal-title">
+      <div class="modal-top">
+        <span id="modal-kicker" class="eyebrow"></span
+        ><button id="close-modal" class="close-btn" aria-label="Fechar janela">
+          ×
+        </button>
+      </div>
+      <h2 id="modal-title"></h2>
+      <div id="modal-content"></div>
+    </dialog>
+  </body>
+</html>

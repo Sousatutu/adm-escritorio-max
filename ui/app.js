@@ -190,6 +190,7 @@
           mode: $("difficulty").value,
           seed:
             root.crypto?.getRandomValues(new Uint32Array(1))[0] ?? Date.now(),
+          randomQuestions: true,
         }),
       );
     }
@@ -337,12 +338,14 @@
         );
         return;
       }
+      const qIdx = s.questions?.[t] ?? 0;
+      const q = stage.questions?.[qIdx] || stage;
       dialog.show(
         "ANÁLISE FORMAL · " + C.concepts[t].name,
         stage.title,
         npcHeader(t) +
-          `<p>${E(stage.question)}</p>` +
-          choices(stage.choices, "data-answer") +
+          `<p>${E(q.question)}</p>` +
+          choices(q.choices, "data-answer") +
           '<p class="pause-note">Acerto: 1 ação. Erro: −1 vida, até −25 pontos e 2 ações.</p>',
       );
       dialog.content

@@ -204,4 +204,17 @@ test("legacy snapshots migrate without destroying signatures or current event", 
   };
   assert.ok(M.migrate(v1));
 });
+test("supports randomized questions per stage when randomQuestions is true", () => {
+  const game = G.fresh({ randomQuestions: true, seed: 42 });
+  assert.equal(game.questions.length, 6);
+  for (let i = 0; i < 6; i++) {
+    assert.ok(
+      game.questions[i] >= 0 &&
+        game.questions[i] < C.stages[i].questions.length,
+    );
+  }
+  const restored = G.restore(game);
+  assert.ok(restored);
+  assert.deepEqual(restored.questions, game.questions);
+});
 module.exports = { harness, play };

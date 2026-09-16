@@ -1,4 +1,4 @@
-﻿(function (root) {
+(function (root) {
   "use strict";
   const common = typeof module !== "undefined" && module.exports;
   const C = common ? require("../content/catalog.js") : root.LB.Content,
@@ -13,16 +13,23 @@
       return x / 4294967296;
     };
   }
-  function fresh({ mode = "normal", seed = 1 } = {}) {
+  function fresh({ mode = "normal", seed = 1, randomQuestions = false } = {}) {
     if (!Object.hasOwn(C.modes, mode)) mode = "normal";
     seed = Number.isInteger(seed) ? seed >>> 0 : 1;
     const random = rng(seed);
+    const questions = randomQuestions
+      ? [0, 1, 2, 3, 4, 5].map((idx) => {
+          const count = C.stages[idx].questions?.length || 1;
+          return Math.floor(random() * count);
+        })
+      : [0, 0, 0, 0, 0, 0];
     return {
       schemaVersion: VERSION,
       contentVersion: CONTENT,
       revision: 0,
       seed,
       mode,
+      questions,
       status: "playing",
       score: 0,
       lives: 3,
@@ -355,6 +362,8 @@
     } else if (a.type === "APPROVE") {
       const conv = state.conversation,
         stage = C.stages[a.target];
+      const qIdx = state.questions?.[a.target] ?? 0;
+      const q = stage?.questions?.[qIdx] || stage;
       if (
         !conv ||
         conv.node !== "decision" ||
@@ -362,7 +371,7 @@
         !stage ||
         !Number.isInteger(a.choice) ||
         a.choice < 0 ||
-        a.choice >= stage.choices.length
+        a.choice >= (q.choices?.length || stage.choices.length)
       )
         return bad("Análise desatualizada ou resposta inválida.");
       if (state.pending)
@@ -375,8 +384,12 @@
         return bad("A aprovação já está válida.");
       const missing = D.missing(state, stage.id);
       if (missing.length) return bad(missing.join(" "));
-      if (a.choice !== stage.correct)
-        outcome = punish(state, "choice", stage.mistake);
+      const expectedCorrect =
+        q.correct !== undefined ? q.correct : stage.correct;
+      const mistakeMsg = q.mistake || stage.mistake;
+      const successMsg = q.success || stage.success;
+      if (a.choice !== expectedCorrect)
+        outcome = punish(state, "choice", mistakeMsg);
       else if (!cost(state, 1))
         outcome = {
           kind: "expired",
@@ -392,7 +405,7 @@
           kind: "approved",
           message: rewarded
             ? "Aprovação revalidada. A recompensa deste marco já foi concedida."
-            : stage.success,
+            : successMsg,
         };
         message(state, "approval", outcome.message, { requirement: stage.id });
         state.conversation = null;
@@ -574,10 +587,22 @@
         raw.actionsUsed < 0 ||
         !Number.isFinite(raw.elapsed) ||
         raw.elapsed < 0 ||
-        !D.validDocuments(raw.documents)
+        !D.validDocuments(raw.documents) ||
+        (raw.questions &&
+          (!Array.isArray(raw.questions) ||
+            raw.questions.length !== 6 ||
+            raw.questions.some(
+              (q, i) =>
+                !Number.isInteger(q) ||
+                q < 0 ||
+                q >= (C.stages[i].questions?.length || 1),
+            )))
       )
         return null;
       const state = D.clone(raw);
+      state.questions = Array.isArray(raw.questions)
+        ? [...raw.questions]
+        : [0, 0, 0, 0, 0, 0];
       if (
         !Array.isArray(state.approvals) ||
         state.approvals.length > 1000 ||

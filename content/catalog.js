@@ -61,6 +61,50 @@
       mistake:
         "Sem os dados obrigatórios, o pedido não pode ser conferido. O registro escrito permite verificar o que foi solicitado.",
       signature: "Ana · Registro conferido",
+      questions: [
+        {
+          question:
+            "Bem-vindo! Para comprar cinco computadores, precisamos abrir o requerimento. Qual é a melhor forma de iniciar?",
+          choices: [
+            "Registrar finalidade, quantidade e justificativa no formulário oficial.",
+            "Enviar somente um recado de voz: todo mundo já sabe do que precisamos.",
+            "Pedir a assinatura e preencher os dados depois.",
+          ],
+          correct: 0,
+          success:
+            "Requerimento 001 registrado. A supervisão pode conferir seu pedido.",
+          mistake:
+            "Sem os dados obrigatórios, o pedido não pode ser conferido. O registro escrito permite verificar o que foi solicitado.",
+        },
+        {
+          question:
+            "O coordenador pediu computadores com urgência e alega que o pedido pode ser verbal agora e registrado mês que vem. Como agir?",
+          choices: [
+            "Aceitar a ordem verbal, pois a pressa do coordenador anula a necessidade de protocolo.",
+            "Exigir a abertura formal e o registro oficial do requerimento antes de qualquer tramitação.",
+            "Anotar em um bilhete avulso e liberar a compra imediatamente.",
+          ],
+          correct: 1,
+          success:
+            "Registro formal realizado. Na burocracia, atos oficiais exigem documentação escrita prévia.",
+          mistake:
+            "A pressa não substitui a formalização. Decisões administrativas precisam de registro oficial para ter validade e rastreabilidade.",
+        },
+        {
+          question:
+            "Um funcionário traz um memorando sem número de protocolo e sem data, dizendo que 'a chefia já deu o aval de boca'. Qual o procedimento?",
+          choices: [
+            "Protocolar e numerar oficialmente o documento com todos os metadados antes de dar andamento.",
+            "Dar andamento direto, confiando na palavra do colega.",
+            "Guardar o papel na gaveta sem registrar no sistema.",
+          ],
+          correct: 0,
+          success:
+            "Documento regularizado e autuado no protocolo com registro cronológico.",
+          mistake:
+            "Sem autuação, número e data, o ato não possui existência jurídica verificável. O protocolo garante a publicidade e a ordem dos atos.",
+        },
+      ],
     },
     {
       role: "Supervisão",
@@ -82,6 +126,50 @@
       mistake:
         "A urgência não elimina as competências dos cargos. Neste fluxo, a supervisão precisa conferir o pedido antes da gerência.",
       signature: "Bruno · Conferência inicial",
+      questions: [
+        {
+          question:
+            "O formulário está completo. Um colega sugere ir direto à direção-geral para ganhar tempo. Como você procede?",
+          choices: [
+            "Pular a gerência, porque o pedido parece urgente.",
+            "Pedir que qualquer colega assine pela gerência.",
+            "Obter a conferência da supervisão e seguir para a gerência.",
+          ],
+          correct: 2,
+          success:
+            "Conferência concluída. Encaminhe o pedido à gerência para a análise de orçamento.",
+          mistake:
+            "A urgência não elimina as competências dos cargos. Neste fluxo, a supervisão precisa conferir o pedido antes da gerência.",
+        },
+        {
+          question:
+            "Um diretor pede que você ignore a conferência da Supervisão e leve o processo direto para pagamento. O que a teoria burocrática orienta?",
+          choices: [
+            "Manter o rito hierárquico e colher a conferência do supervisor imediato antes de avançar.",
+            "Cumprir a ordem do diretor e pular todas as etapas intermediárias.",
+            "Rasgar o processo e começar outro do zero.",
+          ],
+          correct: 0,
+          success:
+            "A linha hierárquica foi respeitada, assegurando a conferência em cada nível de controle.",
+          mistake:
+            "A hierarquia assegura que cada instância fiscalize os atos sob sua responsabilidade. Ordens superiores não devem suprimir controles prévios previstos.",
+        },
+        {
+          question:
+            "A equipe da supervisão encontrou inconsistências nos quantitativos. Um analista sugere 'deixar passar' para não aborrecer o setor. O que fazer?",
+          choices: [
+            "Aprovar mesmo assim para manter um bom clima entre os setores.",
+            "Devolver para saneamento ou registrar a ressalva na conferência formal da supervisão.",
+            "Encaminhar à Diretoria sem apontar o erro.",
+          ],
+          correct: 1,
+          success:
+            "Conferência rigorosa exercida. A supervisão cumpriu seu papel de controle de primeira linha.",
+          mistake:
+            "O papel do supervisor é justamente verificar a conformidade. Omissões violam o dever funcional da posição hierárquica.",
+        },
+      ],
     },
     {
       role: "Gerência",
@@ -103,6 +191,50 @@
       mistake:
         "A análise de orçamento é uma responsabilidade do Financeiro. Distribuir tarefas por função evita sobreposição e encaminhamentos errados.",
       signature: "Carla · Orçamento validado",
+      questions: [
+        {
+          question:
+            "A compra precisa de uma análise de disponibilidade orçamentária. Qual setor deve executar essa tarefa?",
+          choices: [
+            "O Jurídico, porque pode decidir sobre qualquer assunto.",
+            "O Financeiro, responsável pela análise do orçamento.",
+            "A Recepção, porque é o primeiro setor do escritório.",
+          ],
+          correct: 1,
+          success:
+            "A gerência recebeu o parecer financeiro: há orçamento. A direção pode analisar a prioridade do pedido.",
+          mistake:
+            "A análise de orçamento é uma responsabilidade do Financeiro. Distribuir tarefas por função evita sobreposição e encaminhamentos errados.",
+        },
+        {
+          question:
+            "Para adquirir os computadores, a Gerência quer usar a verba destinada à reforma predial sem remanejamento formal. Isso é correto?",
+          choices: [
+            "Sim, qualquer recurso da empresa pode ser gasto livremente pela gerência.",
+            "Não; rubricas orçamentárias possuem destinação específica e exigem remanejamento formal.",
+            "Sim, contanto que ninguém fique sabendo fora da gerência.",
+          ],
+          correct: 1,
+          success:
+            "Adequação orçamentária confirmada dentro das rubricas próprias da Divisão do Trabalho.",
+          mistake:
+            "A divisão de trabalho e finanças exige que cada despesa pertença à sua respectiva dotação orçamentária com previsão legal.",
+        },
+        {
+          question:
+            "Antes de autorizar uma nova despesa com equipamentos, qual dever funcional cabe à gestão de recursos?",
+          choices: [
+            "Comprar imediatamente para aproveitar qualquer promoção do fornecedor.",
+            "Conferir o saldo em estoque no Almoxarifado para evitar compra desnecessária ou em duplicidade.",
+            "Pedir que cada funcionário compre seu próprio computador.",
+          ],
+          correct: 1,
+          success:
+            "Verificação de saldo em estoque efetuada com sucesso, evitando desperdício de recursos.",
+          mistake:
+            "A divisão racional do trabalho estabelece setores de suprimentos exatamente para gerenciar e atestar a necessidade de novas aquisições.",
+        },
+      ],
     },
     {
       role: "Diretoria",
@@ -124,6 +256,50 @@
       mistake:
         "Uma relação pessoal não justifica preferência. Prioridades podem existir, mas precisam seguir critérios institucionais.",
       signature: "Diego · Prioridade analisada",
+      questions: [
+        {
+          question:
+            "Diego é seu amigo e oferece colocar seu pedido na frente de solicitações mais antigas, sem critério previsto. O que você faz?",
+          choices: [
+            "Aceitar: amizades devem facilitar a aprovação.",
+            "Usar o nome de Diego para pressionar os outros setores.",
+            "Seguir a ordem de análise e os critérios institucionais.",
+          ],
+          correct: 2,
+          success:
+            "Seu pedido foi analisado conforme os critérios da organização. Siga para a análise jurídica.",
+          mistake:
+            "Uma relação pessoal não justifica preferência. Prioridades podem existir, mas precisam seguir critérios institucionais.",
+        },
+        {
+          question:
+            "Um diretor sugere contratar uma empresa de um parente próximo sem licitação ou cotação formal. Como proceder?",
+          choices: [
+            "Aceitar a indicação, já que o diretor tem cargo de alto escalão.",
+            "Exigir processo seletivo impessoal com cotação e critérios objetivos e isonômicos.",
+            "Contratar o parente e omitir o parentesco dos autos do processo.",
+          ],
+          correct: 1,
+          success:
+            "Princípio da impessoalidade mantido: critérios objetivos e isonomia respeitados.",
+          mistake:
+            "O modelo weberiano combate o patrimonialismo. O interesse público e as regras institucionais se sobrepõem a laços de sangue e favorecimentos.",
+        },
+        {
+          question:
+            "Chegaram dois pedidos idênticos: um de um amigo da chefia e outro de um funcionário recém-admitido. Qual deve ser a prioridade?",
+          choices: [
+            "Critério objetivo e transparente pré-fixado (ex: ordem cronológica ou urgência justificada em norma).",
+            "Prioridade ao amigo da chefia para evitar atritos com a cúpula.",
+            "Decidir no cara ou coroa para parecer neutro.",
+          ],
+          correct: 0,
+          success:
+            "Critério impessoal aplicado com transparência.",
+          mistake:
+            "A burocracia pura opera sine ira et studio (sem ódio e sem paixão), aplicando a mesma regra a todos os indivíduos indistintamente.",
+        },
+      ],
     },
     {
       role: "Jurídico",
@@ -145,6 +321,50 @@
       mistake:
         "Tempo de serviço não substitui competência técnica. Uma análise especializada exige um profissional habilitado e designado.",
       signature: "Jurídico · Parecer registrado",
+      questions: [
+        {
+          question:
+            "Elisa está em reunião. Uma cláusula do contrato precisa ser analisada. Um colega sem formação na área se oferece para assinar. Qual saída é adequada?",
+          choices: [
+            "Consultar o profissional habilitado e formalmente designado para substituir Elisa.",
+            "Aceitar a assinatura do colega, pois ele já trabalha aqui há muito tempo.",
+            "Ignorar a análise da cláusula para não atrasar o processo.",
+          ],
+          correct: 0,
+          success:
+            "A substituta habilitada e designada conferiu as cláusulas e registrou o parecer. O pedido pode seguir para aprovação final.",
+          mistake:
+            "Tempo de serviço não substitui competência técnica. Uma análise especializada exige um profissional habilitado e designado.",
+        },
+        {
+          question:
+            "A área de TI e o Jurídico alertam que uma cláusula contratual viola as diretrizes de segurança da empresa. A área comercial quer assinar assim mesmo. O que prevalece?",
+          choices: [
+            "A vontade comercial, pois o que importa é fechar o negócio rápido.",
+            "A conformidade técnica e jurídica apontada pelos especialistas habilitados.",
+            "Fazer uma votação informal com todos os funcionários da empresa.",
+          ],
+          correct: 1,
+          success:
+            "Prevaleceu o parecer técnico especializado, resguardando a legalidade da organização.",
+          mistake:
+            "Na administração burocrática, o saber especializado dos corpos técnicos orienta e vincula a validade dos atos formais.",
+        },
+        {
+          question:
+            "Para homologar a conformidade dos equipamentos de informática, quem deve emitir o laudo de recebimento definitivo?",
+          choices: [
+            "Qualquer pessoa que use computador em seu dia a dia.",
+            "O profissional técnico qualificado e investido da atribuição pericial específica.",
+            "O motorista que fez o transporte das caixas.",
+          ],
+          correct: 1,
+          success:
+            "Laudo pericial emitido por corpo técnico especializado com habilitação comprovada.",
+          mistake:
+            "A legitimidade do ato pericial depende do conhecimento técnico comprovado e da designação do profissional competente.",
+        },
+      ],
     },
     {
       role: "Direção-geral",
@@ -165,6 +385,50 @@
       mistake:
         "Prestígio pessoal não confere automaticamente autoridade. A competência para decidir deve estar prevista nas normas ou em delegação válida.",
       signature: "Felipe · Aprovação final",
+      questions: [
+        {
+          question:
+            "Todas as análises estão prontas. Um fundador aposentado visita a empresa e oferece a aprovação final. Quem pode aprovar segundo as regras deste pedido?",
+          choices: [
+            "O fundador aposentado, por ser a pessoa mais respeitada.",
+            "A direção-geral ou uma pessoa com delegação formal válida para essa decisão.",
+            "Qualquer pessoa que tenha participado das etapas anteriores.",
+          ],
+          correct: 1,
+          success:
+            "Compra aprovada! Você completou o fluxo com registros, responsabilidades e autoridade definidos.",
+          mistake:
+            "Prestígio pessoal não confere automaticamente autoridade. A competência para decidir deve estar prevista nas normas ou em delegação válida.",
+        },
+        {
+          question:
+            "Qual é o fundamento do poder de decisão e mando de um gestor na burocracia racional-legal de Max Weber?",
+          choices: [
+            "A tradição familiar herdada de geração em geração.",
+            "As normas, regulamentos legais e a competência investida no cargo.",
+            "O carisma sobrenatural e magnetismo pessoal do líder.",
+          ],
+          correct: 1,
+          success:
+            "Compreensão exata da autoridade racional-legal: o poder reside nas normas e no cargo.",
+          mistake:
+            "Na burocracia moderna, a autoridade não é tradicional nem puramente carismática; ela se fundamenta na legalidade das ordens instituídas e na investidura do cargo.",
+        },
+        {
+          question:
+            "O Diretor-Geral precisa se ausentar e quer deixar um substituto. O que confere validade jurídica às decisões tomadas na sua ausência?",
+          choices: [
+            "Ato formal de delegação de competência com prazo, limites e publicação oficial.",
+            "Uma piscadela de olho ou acordo verbal antes de sair para o almoço.",
+            "A antiguidade do funcionário mais velho do setor.",
+          ],
+          correct: 0,
+          success:
+            "Ato de delegação formal verificado e aceito em estrita conformidade legal.",
+          mistake:
+            "Sem ato formal de delegação, os atos praticados pelo substituto são nulos por vício de competência na ordem racional-legal.",
+        },
+      ],
     },
   ];
   const events = [

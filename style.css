@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   color-scheme: dark;
   --bg: #111f2e;
   --panel: #1b3042;
@@ -64,7 +64,9 @@ canvas:focus-visible {
   outline: 3px solid #e3b56b;
   outline-offset: 4px;
 }
-button:focus:not(:focus-visible) {
+button:focus:not(:focus-visible),
+dialog:focus,
+dialog:focus-visible {
   outline: none;
 }
 .topbar {
@@ -1081,6 +1083,12 @@ dialog .small {
 .choice:hover {
   background: #edf1e4;
   border-color: #84a08d;
+}
+.choice:focus-visible {
+  outline: none;
+  border-color: #2d6958;
+  background: #edf1e4;
+  box-shadow: 0 0 0 2px #2d6958;
 }
 .choice-number {
   font:

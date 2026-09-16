@@ -49,11 +49,12 @@
         document.getElementById("modal-title").textContent = title;
         content.innerHTML = html;
         if (!el.open) el.showModal();
-        el.scrollTop = 0;
-        const first = content.querySelector(
-          "[autofocus],button:not([disabled]),select,input",
-        );
-        (first || closeButton).focus({ preventScroll: true });
+        const auto = content.querySelector("[autofocus]");
+        if (auto) {
+          auto.focus({ preventScroll: true });
+        } else {
+          el.focus({ preventScroll: true });
+        }
       },
       bind(id, fn) {
         const button = document.getElementById(id);
